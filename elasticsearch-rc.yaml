@@ -189,7 +189,7 @@ resources:
         nginx_vhost_str: "LOAD_BALANCER"
         nginx_vhost_template: "loadbalancer"
         nginx_upstream_server: { get_attr: [es_nodes, networks, { get_param: rc_network_name}, 0] }
-        nginx_lb_nodes: { get_attr: [joomla_secondary, public_ip] }
+        nginx_lb_nodes: { get_attr: [es_nodes, es_server_ip] }
         firewall_global_rules: [ "0.0.0.0,0,22,tcp", "0.0.0.0,0,8080,tcp"]
       config:
         get_resource: loadbalancer_config

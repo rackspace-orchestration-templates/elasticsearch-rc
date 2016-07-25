@@ -115,7 +115,7 @@ resources:
 
 outputs:
   es_server_ip:
-    value: { get_attr: [es_server, accessIPv4] }
+    value: { get_attr: [es_server, networks, { get_param: rc_network_name }, 0] }
 
   es_private_ip:
     value: { get_attr: [es_server, networks, private, 0] }
