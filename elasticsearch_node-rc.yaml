@@ -81,13 +81,19 @@ resources:
       - network: "11111111-1111-1111-1111-111111111111"
       - network: { get_param: rc_network_name }
 
+  es_server_public_ip:
+    type: Rackspace::RackConnect::PublicIP
+    depends_on: es_server
+    properties:
+      server_id: { get_resource: es_server }
+
   es_setup:
     type: "OS::Heat::ChefSolo"
-    depends_on: es_server
+    depends_on: es_server_public_ip
     properties:
       username: root
       private_key: { get_param: ssh_private_key }
-      host: { get_attr: [es_server, networks, private, 0] }
+      host: { get_attr: [es_server, accessIPv4] }
       kitchen: { get_param: kitchen }
       chef_version: { get_param: chef_version }
       data_bags:
