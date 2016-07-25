@@ -97,13 +97,13 @@ parameters:
     description: |
       URL to the Child template that will provision Elasticsearch nodes.
     type: string
-    default: https://raw.githubusercontent.com/rackspace-orchestration-templates/elasticsearch/master/elasticsearch_node.yaml
+    default: https://raw.githubusercontent.com/rackspace-orchestration-templates/elasticsearch-rc/master/elasticsearch_node-rc.yaml
 
   kitchen:
     label: Kitchen
     description: URL for the kitchen to use
     type: string
-    default: https://github.com/rackspace-orchestration-templates/elasticsearch
+    default: https://github.com/rackspace-orchestration-templates/elasticsearch-rc
 
   chef_version:
     label: Chef Version
