@@ -63,6 +63,13 @@ parameters:
     type: string
     default: 12.3.0
 
+  rc_network_name:
+    type: string
+    label: RackConnect Network
+    description: Name or UUID of RackConnected network to attach this server to
+    constraints:
+    - custom_constraint: rackconnect.network
+    immutable: true
 resources:
 
   es_server:
@@ -75,9 +82,9 @@ resources:
       metadata:
         rax-heat: { get_param: "stack_id" }
       networks:
-      - uuid: "00000000-0000-0000-0000-000000000000"
-      - uuid: "11111111-1111-1111-1111-111111111111"
-      - uuid: { get_param: es_network_id }
+      - network: "00000000-0000-0000-0000-000000000000"
+      - network: "11111111-1111-1111-1111-111111111111"
+      - network: { get_param: rc_network_name }
 
   es_setup:
     type: "OS::Heat::ChefSolo"

@@ -16,6 +16,10 @@ parameter_groups:
   - es_auth_user
   - es_version
 
+- label: RackConnect Settings
+  parameters:
+  - rc_network_name
+
 - label: rax-dev-params
   parameters:
   - load_balancer_hostname
@@ -111,6 +115,13 @@ parameters:
     type: string
     default: 12.3.0
 
+  rc_network_name:
+    type: string
+    label: RackConnect Network
+    description: Name or UUID of RackConnected network to attach this server to
+    constraints:
+    - custom_constraint: rackconnect.network
+    immutable: true
 resources:
 
   ssh_key:
@@ -118,12 +129,6 @@ resources:
     properties:
       name: { get_param: "OS::stack_id" }
       save_private_key: true
-
-  es_network:
-    type: Rackspace::Cloud::Network
-    properties:
-      label: es_network
-      cidr: 192.168.134.0/24
 
   es_password:
     type: OS::Heat::RandomString
@@ -143,12 +148,12 @@ resources:
           server_hostname:  { get_param: server_hostname }
           ssh_keypair_name: { get_resource: ssh_key }
           ssh_private_key:  { get_attr: [ssh_key, private_key] }
-          es_network_id:    { get_resource: es_network }
           es_password:      { get_attr: [es_password, value] }
           es_auth_user:     { get_param: es_auth_user }
           es_version:       { get_param: es_version }
           kitchen:          { get_param: kitchen }
           chef_version:     { get_param: chef_version }
+          rc_network_name:  { get_param: rc_network_name }
 
   #nginx load balancer
   upload_lb_role_config:
