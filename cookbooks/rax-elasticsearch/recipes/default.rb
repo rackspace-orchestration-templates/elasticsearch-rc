@@ -13,7 +13,7 @@ node.set[:java][:jdk_version] = 7
 include_recipe 'java'
 
 # find the first ipv4 address of the cloud network interface
-cn_interface_ipv4 = node[:network][:interfaces][:eth2][:addresses].find \
+cn_interface_ipv4 = node[:network][:interfaces][:eth1][:addresses].find \
   {|addr, addr_info| addr_info[:family] == "inet"}.first
 
 Chef::Log.info("print interface ip is #{cn_interface_ipv4}")
