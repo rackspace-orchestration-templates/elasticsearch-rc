@@ -27,6 +27,8 @@ parameter_groups:
   - child_template
   - kitchen
   - chef_version
+  - ansible_source
+  - loadbalancer_flavor
 
 parameters:
 
@@ -121,6 +123,25 @@ parameters:
     description: Name or UUID of RackConnected network to attach this server to
     constraints:
     - custom_constraint: rackconnect.network
+    immutable: true
+
+  ansible_source:
+    type: string
+    default: http://catalog.rs-heat.com/ansible-roles/ansible-roles.tar.gz
+    label: Ansible Tarball
+    description: The Ansible Roles will be pulled from the location provided
+    immutable: true
+
+  loadbalancer_flavor:
+    type: string
+    default: 2 GB General Purpose v1
+    label: Server Flavor
+    description: Flavor of Cloud Server to use for Drupal
+    constraints:
+    - allowed_values:
+      - 2 GB General Purpose v1
+      - 4 GB General Purpose v1
+      - 8 GB General Purpose v1
     immutable: true
 resources:
 
@@ -222,7 +243,7 @@ resources:
           template: stack_Load_Balancer
           params:
             stack: { get_param: "OS::stack_name" }
-      image: { get_param: server_image }
+      image: Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM) (Orchestration)
       flavor: { get_param: loadbalancer_flavor }
       key_name: { get_resource: ssh_key }
       software_config_transport: POLL_TEMP_URL

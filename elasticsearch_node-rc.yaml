@@ -25,10 +25,6 @@ parameters:
     description: Nova keypair name for ssh access to the server
     type: string
 
-  es_network_id:
-    description: cloud network id for intra-cluster communication
-    type: string
-
   ssh_private_key:
     description: private key to access the created servers
     type: string
