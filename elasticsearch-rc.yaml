@@ -1,9 +1,11 @@
 heat_template_version: 2013-05-23
 
 description: |
+  ####Multiple Linux servers - RCv3
   Multiple Linux servers running an
   [Elasticsearch](http://www.elasticsearch.org/) cluster.
 
+  This template will only function with RackConnect v3.
 parameter_groups:
 
 - label: Server Settings
