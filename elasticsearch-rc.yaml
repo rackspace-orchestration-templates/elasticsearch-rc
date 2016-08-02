@@ -1,7 +1,7 @@
 heat_template_version: 2013-05-23
 
 description: |
-  ####Multiple Linux servers - RCv3
+  #### Multiple Linux servers - RCv3
   Multiple Linux servers running an
   [Elasticsearch](http://www.elasticsearch.org/) cluster.
 
